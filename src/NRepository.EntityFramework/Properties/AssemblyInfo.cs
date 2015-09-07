@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("NRepository.EntityFramework")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyVersion("3.2.1.0")]
-[assembly: AssemblyFileVersion("3.2.1.0")]
-[assembly: AssemblyInformationalVersion("3.2.1")]
+[assembly: AssemblyVersion("3.3.0.0")]
+[assembly: AssemblyFileVersion("3.3.0.0")]
+[assembly: AssemblyInformationalVersion("3.3.0")]
 
 [assembly: AssemblyDescription("See https://nrepository.codeplex.com")]
 [assembly: AssemblyCompany("Blue Pear (Software) Ltd.")]

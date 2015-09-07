@@ -2,24 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>NRepository.EntityFramework</id>
-    <version>3.2.0.0</version>
+    <version>3.3.0.0</version>
     <title>NRepository.EntityFramework</title>
     <authors>John Kelly</authors>
-    <licenseUrl>https://nrepository.codeplex.com/license</licenseUrl>
+    <licenseUrl>https://github.com/j-kelly/NRepository.EntityFramework/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://nrepository.codeplex.com/</projectUrl>
     <iconUrl>https://bluepear-public.sharepoint.com/SiteAssets/NRepository.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NRepository.EntityFramework is a generic repository library with a strong focus on CQRS.</description>
     <releaseNotes>
-1. Added new AddRange extension method
-2. Removed sealed from EntityFrameworkRepository
+1. Upgraded to NRepository.Core V3.3.0.0
     </releaseNotes>
     <copyright>© Blue Pear (Software) Ltd. 2015</copyright>
     <tags>Repository EF entity framework cqrs database generic unit of work MongoDB IRepository DDD domain driven design</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="EntityFramework" version="6.1.3" />
-        <dependency id="NRepository.Core" version="3.1.0" />
+        <dependency id="NRepository.Core" version="3.3.0" />
       </group>
     </dependencies>
   </metadata>
