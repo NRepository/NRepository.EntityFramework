@@ -10,8 +10,7 @@
     <iconUrl>https://bluepear-public.sharepoint.com/SiteAssets/NRepository.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NRepository.EntityFramework is a generic repository library with a strong focus on CQRS.</description>
-    <releaseNotes>
-1. Upgraded to .Net 4.5.2
+    <releaseNotes>1. Upgraded to .Net 4.5.2
     </releaseNotes>
     <copyright>© Blue Pear (Software) Ltd. 2015</copyright>
     <tags>Repository EF entity framework cqrs database generic unit of work MongoDB IRepository DDD domain driven design</tags>
