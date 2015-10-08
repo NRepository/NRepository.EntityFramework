@@ -21,7 +21,7 @@ namespace NRepository.EntityFramework
 
             var dbContext = commandRepository.ObjectContext as DbContext;
             if (dbContext == null)
-                throw new EntityRepositoryException("AddRange can only be used with a DbContext");
+                throw new RepositoryException("AddRange can only be used with a DbContext");
 
             dbContext.Set<TEntity>().AddRange(entities);
 
@@ -39,7 +39,7 @@ namespace NRepository.EntityFramework
 
             var dbContext = commandRepository.ObjectContext as DbContext;
             if (dbContext == null)
-                throw new EntityRepositoryException("ModifyEntityStateCommandInterceptor can only be used with a DbContext");
+                throw new RepositoryException("ModifyEntityStateCommandInterceptor can only be used with a DbContext");
 
             var entry = dbContext.Entry(entity);
             var oldEntityState = entry.State;
@@ -66,7 +66,7 @@ namespace NRepository.EntityFramework
 
             var dbContext = repository.ObjectContext as DbContext;
             if (dbContext == null)
-                throw new EntityRepositoryException("Load can only be used with a DbContext");
+                throw new RepositoryException("Load can only be used with a DbContext");
 
             var query = dbContext.Entry(entity).Reference(navigationProperty).Query();
             query = query.AddQueryStrategy(strategies);
@@ -91,7 +91,7 @@ namespace NRepository.EntityFramework
 
             var dbContext = repository.ObjectContext as DbContext;
             if (dbContext == null)
-                throw new EntityRepositoryException("Load can only be used with a DbContext");
+                throw new RepositoryException("Load can only be used with a DbContext");
 
             var query = dbContext.Entry(entity).Collection(navigationProperty).Query();
             query = query.AddQueryStrategy(strategies);
@@ -112,7 +112,7 @@ namespace NRepository.EntityFramework
 
             var dbContext = repository.ObjectContext as DbContext;
             if (dbContext == null)
-                throw new EntityRepositoryException("Load can only be used with a DbContext");
+                throw new RepositoryException("Load can only be used with a DbContext");
 
             var property = PropertyInfo<TEntity>.GetMemberName(navigationProperty);
             var query = (IQueryable<TElement>)dbContext.Entry(entity).Collection(property).Query();
@@ -129,7 +129,7 @@ namespace NRepository.EntityFramework
             Check.NotEmpty(sql, "sql");
 
             if (!(commandRepository.ObjectContext is DbContext))
-                throw new EntityRepositoryException("ExecuteStoredProcudure can only be used with a DbContext");
+                throw new RepositoryException("ExecuteStoredProcudure can only be used with a DbContext");
 
             var database = ((DbContext)commandRepository.ObjectContext).Database;
             var retVal = database.ExecuteSqlCommand(sql, args);
@@ -146,7 +146,7 @@ namespace NRepository.EntityFramework
             Check.NotEmpty(sql, "sql");
 
             if (!(queryRepository.ObjectContext is DbContext))
-                throw new EntityRepositoryException("ExecuteStoredProcudure can only be used with a DbContext");
+                throw new RepositoryException("ExecuteStoredProcudure can only be used with a DbContext");
 
             var database = ((DbContext)queryRepository.ObjectContext).Database;
             IEnumerable<T> data = database.SqlQuery<T>(sql, args);

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>NRepository.EntityFramework</id>
-    <version>3.3.0.0</version>
+    <version>4.0.0.0</version>
     <title>NRepository.EntityFramework</title>
     <authors>John Kelly</authors>
     <licenseUrl>https://github.com/j-kelly/NRepository.EntityFramework/blob/master/LICENSE</licenseUrl>
@@ -11,18 +11,18 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NRepository.EntityFramework is a generic repository library with a strong focus on CQRS.</description>
     <releaseNotes>
-1. Upgraded to NRepository.Core V3.3.0.0
+1. Upgraded to .Net 4.5.2
     </releaseNotes>
     <copyright>© Blue Pear (Software) Ltd. 2015</copyright>
     <tags>Repository EF entity framework cqrs database generic unit of work MongoDB IRepository DDD domain driven design</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="EntityFramework" version="6.1.3" />
-        <dependency id="NRepository.Core" version="3.3.0" />
+        <dependency id="NRepository.Core" version="4.0.0" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\release\NRepository.EntityFramework.dll" target="lib\net45" />
+    <file src="bin\release\NRepository.EntityFramework.dll" target="lib\net452" />
   </files>
 </package>

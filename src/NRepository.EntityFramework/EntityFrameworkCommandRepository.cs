@@ -1,19 +1,18 @@
 namespace NRepository.EntityFramework
 {
+    using NRepository.Core.Command;
+    using NRepository.Core.Events;
+    using NRepository.EntityFramework.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Validation;
     using System.Linq;
-    using NRepository.Core;
-    using NRepository.Core.Command;
-    using NRepository.Core.Events;
-    using NRepository.EntityFramework.Utilities;
 
     public class EntityFrameworkCommandRepository : CommandRepositoryBase
     {
         private readonly ICommandInterceptors _CommandInterceptors;
-        
+
         public EntityFrameworkCommandRepository(
             DbContext dbContext,
             ICommandInterceptors commandInterceptor)
@@ -86,32 +85,13 @@ namespace NRepository.EntityFramework
 
         public override int Save()
         {
-            try
-            {   
-                var writtenObjectsCount =  _CommandInterceptors.SaveCommandInterceptor.Save(
-                    this,
-                    new Func<int>(() => { return DbContext.SaveChanges(); }));
+            var writtenObjectsCount = _CommandInterceptors.SaveCommandInterceptor.Save(
+                this,
+                new Func<int>(() => { return DbContext.SaveChanges(); }));
 
-                EventHandlers.RepositorySavedEventHandler.Handle(new RepositorySavedEvent(this));
+            EventHandlers.RepositorySavedEventHandler.Handle(new RepositorySavedEvent(this));
 
-                return writtenObjectsCount;
-            }
-            catch (DbEntityValidationException validationException)
-            {
-                if (_CommandInterceptors.SaveCommandInterceptor.ThrowOriginalException)
-                    throw;
-
-                var entityErrors = CreateDbEntityValidationErrorDictionary(validationException);
-                var evEx = new EntityValidationRepositoryException(entityErrors, validationException);
-                throw evEx;
-            }
-            catch (Exception ex)
-            {
-                if (_CommandInterceptors.SaveCommandInterceptor.ThrowOriginalException)
-                    throw;
-
-                throw new EntityRepositoryException("Failed to save changes. See inner exception for details.", ex);
-            }
+            return writtenObjectsCount;
         }
 
         private static Dictionary<string, string> CreateDbEntityValidationErrorDictionary(DbEntityValidationException dbException)

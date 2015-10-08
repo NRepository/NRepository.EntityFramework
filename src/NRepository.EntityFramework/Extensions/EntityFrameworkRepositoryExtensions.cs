@@ -1,13 +1,13 @@
 namespace NRepository.EntityFramework
 {
+    using NRepository.Core;
+    using NRepository.Core.Command;
+    using NRepository.Core.Query;
+    using NRepository.EntityFramework.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq.Expressions;
-    using NRepository.Core;
-    using NRepository.Core.Query;
-    using NRepository.Core.Command;
-    using NRepository.EntityFramework.Utilities;
 
     public static class EntityFrameworkRepositoryExtensions
     {

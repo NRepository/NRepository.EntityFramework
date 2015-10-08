@@ -1,11 +1,9 @@
 namespace NRepository.EntityFramework.Query
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using NRepository.Core.Query;
     using NRepository.Core;
+    using NRepository.Core.Query;
     using NRepository.EntityFramework.Utilities;
+    using System.Linq;
 
     public class ExecuteStoreProcedureQueryStrategy<TEntity> : QueryStrategy
     {
@@ -40,7 +38,7 @@ namespace NRepository.EntityFramework.Query
         public override IQueryable<T> GetQueryableEntities<T>(object additionalQueryData)
         {
             if (typeof(TEntity) != typeof(T))
-                throw new EntityRepositoryException(string.Format("Unexpected type in QueryStrategy. Expected: {0}, was: {1}", typeof(TEntity).Name, typeof(T).Name));
+                throw new RepositoryException(string.Format("Unexpected type in QueryStrategy. Expected: {0}, was: {1}", typeof(TEntity).Name, typeof(T).Name));
 
             var entities = QueryRepository.ExecuteSqlQuery<T>(Sql, Args);
             return (IQueryable<T>)entities.AsQueryable();
