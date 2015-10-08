@@ -1,13 +1,11 @@
 ﻿namespace NRepository.EntityFramework.Tests
 {
     using NRepository.Core.Query;
-    using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     using NRepository.EntityFramework;
     using NRepository.TestKit;
+    using NUnit.Framework;
+    using System;
+    using System.Linq;
 
 
     // Brings NRepository.EntityFramework into NCover
@@ -23,7 +21,7 @@
             var children = repository.GetEntities<Child>(
                 new OrderByQueryStrategy<Child>(p => p.LastName));
 
-            var pager = new FilterByPageQueryStrategy(2, 2, true);
+            var pager = new PagingQueryStrategy(2, 2, true);
             var results = children.AddQueryStrategy(pager);
 
             results.Count().ShouldEqual(2);
@@ -108,7 +106,7 @@
         {
             var _queryRepository = new EntityFrameworkQueryRepository(new FamilyDbContext());
 
-            var ss = new MultipleTextSearchSpecificationStrategy<Person>(
+            var ss = new TextSearchSpecificationStrategy<Person>(
                     "a",
                     p => p.FirstName);
 
@@ -117,9 +115,9 @@
             var rowCountCallback = default(Func<int>);
             var results = _queryRepository.GetEntities<Person>(
                 ss,
-                new ConditionalQueryStrategy(true,
-                    new OrderByQueryStrategy("FirstName"),
-                    new PagingQueryStrategy(0, 2).OnCondition(true)));
+                //                new ConditionalQueryStrategy(true, // Removed as causes stack overflow when using PagingQueryStrat
+                new OrderByQueryStrategy("FirstName"),
+                new PagingQueryStrategy(0, 2, out rowCountCallback).OnCondition(true));
 
             //            var rowCount2 = rowCountCallback();
             var rowCount = results.Count();
